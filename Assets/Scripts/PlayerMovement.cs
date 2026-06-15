@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float turnSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] public float speed;
+    [SerializeField] public float turnSpeed;
+    [SerializeField] public float jumpForce;
     private Vector2 _direction;
     private Vector2 direction;
     private Vector2 _turnDirection;
