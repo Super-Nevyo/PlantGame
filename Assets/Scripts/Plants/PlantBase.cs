@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlantBase : MonoBehaviour
 {
     [SerializeField] protected Nutrient[] nutrients;
+    private Pot _pot;
 
 
 
@@ -10,6 +11,7 @@ public class PlantBase : MonoBehaviour
     {
         foreach (var n in nutrients)
         {
+            _pot.PullNutrient(n.Name, n.AbsorbNutrient(_pot.PullNutrient(n.Name)));
             if (n.CheckNutrient())
             {
                 // plant is not sick
@@ -37,10 +39,7 @@ public class PlantBase : MonoBehaviour
     {
 
     }
-    public void FertalizePlant(Nutrient[] InNutrients)
-    {
-
-    }
+    
     public bool IsReadyToGrow()
     {
         return false;

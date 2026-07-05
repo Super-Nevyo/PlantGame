@@ -1,5 +1,3 @@
-using UnityEngine;
-
 [System.Serializable]
 public class Nutrient
 {
@@ -9,8 +7,17 @@ public class Nutrient
     {
         return false;
     }
-    public void AbsorbNutrient(float amount)
+    public float AbsorbNutrient(float amount)
     {
-        AmountInPlant += amount;
+        if (amount > AbsorptionRateMin)
+        {
+            AmountInPlant += AbsorptionRateMin + (amount - AbsorptionRateMin) * AbsorptionRatePercent / 100;
+            return AbsorptionRateMin + (amount - AbsorptionRateMin) * AbsorptionRatePercent / 100;
+        }
+        else
+        {
+            AmountInPlant += amount;
+            return amount;
+        }
     }
 }
