@@ -30,10 +30,28 @@ public class NutrientInformation : ScriptableObject
     private void ChangePlantColour(PlantBase plant, bool Sick)
     {
         // change the plant's colour
+        if (Sick)
+        {
+            plant.Sprite.color -= NutrientColour;
+
+        }
+        else
+        {
+            plant.Sprite.color += NutrientColour;
+        }
     }
     private void ChangePlantSaturation(PlantBase plant, bool Sick)
     {
         // change the plant's saturation
+        if (Sick)
+        {
+            plant.Sprite.color -= Saturation;
+
+        }
+        else
+        {
+            plant.Sprite.color += Saturation;
+        }
     }
     private void PlantLoseGrowthStage(PlantBase plant, bool Sick)
     {

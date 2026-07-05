@@ -13,6 +13,8 @@ public class PlantBase : MonoBehaviour
         {
             n.Initialization(this);
         }
+        GameManager.instance.DayNight += DoNightCycle;
+        _pot = GetComponentInParent<Pot>();
     }
     public void DoNightCycle()
     {
@@ -56,5 +58,18 @@ public class PlantBase : MonoBehaviour
     public bool IsReadyToFlower()
     {
         return false;
+    }
+    public void WriteStats()
+    {
+        Debug.Log("Plant:");
+        foreach (var n in nutrients)
+        {
+            Debug.Log(n.Name + ": " + n.AmountInPlant);
+        }
+        Debug.Log("Pot:");
+        foreach(var n in _pot.Nutrients)
+        {
+            Debug.Log(n.Name + ": " + n.AmountInPot);
+        }
     }
 }

@@ -4,7 +4,7 @@ public class PlantNutrient
 {
     public string Name;
     public float AbsorptionRatePercent, AbsorptionRateMin, AmountInPlant, AmountConsumed, MinSick, MaxSick;
-    [HideInInspector] public bool IsSick;
+    [HideInInspector] public bool IsSick = false;
     public NutrientInformation NutrientInfo;
     private PlantBase plant;
 

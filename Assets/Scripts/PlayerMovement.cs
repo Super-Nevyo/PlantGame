@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         _direction = direction != Vector2.zero ? new Vector2(Mathf.Cos(Mathf.Atan2(direction.y, direction.x) - _rb.rotation.eulerAngles.y * Mathf.Deg2Rad), Mathf.Sin(Mathf.Atan2(direction.y, direction.x) - _rb.rotation.eulerAngles.y * Mathf.Deg2Rad)) : Vector2.zero;
         _rb.linearVelocity = new Vector3(_direction.x * speed, _rb.linearVelocity.y, _direction.y * speed);
         _rb.angularVelocity = turnSpeed * _turnDirection.x * Vector3.up;
-        Debug.Log(_rb.angularVelocity);
+        //Debug.Log(_rb.angularVelocity);
     }
 
     public void OnMove(InputValue value)

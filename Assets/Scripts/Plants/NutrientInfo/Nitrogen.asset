@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffa767b5a8e0264fb911dc8c72152f1, type: 3}
   m_Name: Nitrogen
   m_EditorClassIdentifier: Assembly-CSharp::NutrientInformation
-  ChangeColour: 0
-  ChangeSaturation: 0
+  ChangeColour: 1
+  ChangeSaturation: 1
   LoseGrowthStage: 0
   LeafHoles: 0
   InstantDeath: 0
   PreventFlowering: 0
-  NutrientColour: {r: 0, g: 0, b: 0, a: 0}
-  Saturation: {r: 0, g: 0, b: 0, a: 0}
+  NutrientColour: {r: 0.5882353, g: 0.39215687, b: 0, a: 0.39215687}
+  Saturation: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.39215687}
