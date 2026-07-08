@@ -14,7 +14,22 @@ public class PlantNutrient
     }
     public bool CheckNutrient()
     {
-        return false;
+        if (AmountInPlant < AmountConsumed)
+        {
+            AmountInPlant = 0;
+        }
+        else
+        {
+            AmountInPlant -= AmountConsumed;
+        }
+        if (AmountInPlant < MinSick || AmountInPlant > MaxSick)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     public float AbsorbNutrient(float amount)
     {

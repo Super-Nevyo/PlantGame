@@ -825,7 +825,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a131d2807d5efe4f822c37ed74de68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pot
-  Nutrients: []
+  Nutrients:
+  - Name: Nitrogen
+    AmountInPot: 200
 --- !u!1 &561840751
 GameObject:
   m_ObjectHideFlags: 0
