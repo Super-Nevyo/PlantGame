@@ -18,5 +18,5 @@ MonoBehaviour:
   LeafHoles: 0
   InstantDeath: 0
   PreventFlowering: 0
-  NutrientColour: {r: 0.5882353, g: 0.39215687, b: 0, a: 0.39215687}
-  Saturation: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.39215687}
+  NutrientColour: {r: 0, g: 0.19607843, b: 0, a: 0}
+  Saturation: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
