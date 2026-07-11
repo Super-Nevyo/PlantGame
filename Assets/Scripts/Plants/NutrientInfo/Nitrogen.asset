@@ -18,6 +18,12 @@ MonoBehaviour:
   LoseGrowthStage: 0
   LeafHoles: 0
   InstantDeath: 0
-  PreventFlowering: 0
+  RestrictNutrientIntake: 0
+  ChangeColourHigh: 1
+  ChangeSaturationHigh: 1
+  LoseGrowthStageHigh: 0
+  LeafHolesHigh: 0
+  InstantDeathHigh: 0
+  RestrictNutrientIntakeHigh: 0
   NutrientColour: {r: 0, g: 1, b: 0, a: 0}
   Saturation: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}

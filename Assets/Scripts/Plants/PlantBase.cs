@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class PlantBase : MonoBehaviour
@@ -7,13 +8,17 @@ public class PlantBase : MonoBehaviour
     private Pot _pot;
     public SpriteRenderer Sprite;
     private List<int> _plantWounds = new List<int>();
+    private int _totalWounds = 0;
+    public int WoundsToPreventGrowth;
+    public int WoundsToKill;
     private int _nutrientYes;
     private int _daysHealthy;
     [SerializeField] private int _daysHealthyToGrow;
     [SerializeField] private int _daysHealthyToFlower;
     private bool _hasNutrientsToGrow;
-    public int GrowthStage { get; private set; } = 0;
+    public int GrowthStage { get; private set; } = 1;
     [SerializeField] private int numOfGrowthStages;
+    [SerializeField] private Sprite[] sprites; 
 
 
     private void Start()
@@ -24,17 +29,26 @@ public class PlantBase : MonoBehaviour
         }
         GameManager.instance.DayNight += DoNightCycle;
         _pot = GetComponentInParent<Pot>();
+        Sprite.sprite = sprites[GrowthStage];
     }
     public void DoNightCycle()
     {
         Debug.Log("NightCycle Happened");
+        _daysHealthy++;
         HealWounds(); // plants need the whole night to heal wounds so wont use the absorbed nutrients, just the ones that were already in the plant
+        _totalWounds = 0;
+        foreach (int i in _plantWounds)
+        {
+            _totalWounds += i;
+        }
+        if (_totalWounds >= WoundsToPreventGrowth) { ResetHealthyDays(); Debug.Log("Plant Too Wounded"); }
+        if (_totalWounds >= WoundsToKill) KillPlant();
         // do all nutrient checks
         _nutrientYes = 0;
         foreach (var n in nutrients)
         {
-            _pot.PullNutrient(n.NutrientInfo, n.AbsorbNutrient(_pot.PullNutrient(n.NutrientInfo)));
-            if (n.CheckNutrient())
+            _pot.PullNutrient(n.NutrientInfo, n.AbsorbNutrient(_pot.PullNutrient(n.NutrientInfo), GrowthStage));
+            if (n.CheckNutrient(GrowthStage))
             {
                 // plant is not sick
                 if (n.IsSick) n.MakePlantHealthy(); // if plant was sick, make it healthy
@@ -69,6 +83,8 @@ public class PlantBase : MonoBehaviour
         {
             n.ConsumeNutrientsForGrowth(GrowthStage);
         }
+        GrowthStage++;
+        Sprite.sprite = sprites[GrowthStage];
     }
     protected void FlowerPlant()
     {
@@ -77,8 +93,13 @@ public class PlantBase : MonoBehaviour
     
     protected virtual bool IsReadyToGrow()
     {
-        if (_daysHealthy >= _daysHealthyToGrow && _hasNutrientsToGrow && numOfGrowthStages < GrowthStage && SpecialGrowthConditions())
+        Debug.Log(_daysHealthy >= _daysHealthyToGrow);
+        Debug.Log(_hasNutrientsToGrow );
+        Debug.Log( numOfGrowthStages > GrowthStage);
+        Debug.Log(SpecialGrowthConditions());
+        if (_daysHealthy >= _daysHealthyToGrow && _hasNutrientsToGrow && numOfGrowthStages > GrowthStage && SpecialGrowthConditions())
         {
+            Debug.Log("Is Ready To Grow");
             ResetHealthyDays();
             return true;
         }
@@ -93,7 +114,7 @@ public class PlantBase : MonoBehaviour
     {
         if(_daysHealthy >= _daysHealthyToFlower)
         {
-            ResetHealthyDays();
+            //ResetHealthyDays();
             return true;
         }
         else
@@ -143,8 +164,12 @@ public class PlantBase : MonoBehaviour
             }
         }
     }
-    public void ResetHealthyDays()
+    private void ResetHealthyDays()
     {
         _daysHealthy = 0;
+    }
+    public void KillPlant()
+    {
+
     }
 }

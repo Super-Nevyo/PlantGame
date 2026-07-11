@@ -1703,31 +1703,94 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlantBase
   nutrients:
   - Name: Nitrogen
-    AbsorptionRatePercent: 10
-    AbsorptionRateMin: 100
+    AbsorptionRatePercent:
+    - 20
+    - 10
+    - 15
+    - 10
+    AbsorptionRateMin:
+    - 0
+    - 100
+    - 110
+    - 100
+    AmountConsumed:
+    - 0
+    - 130
+    - 150
+    - 110
+    MinSick:
+    - 100
+    - 150
+    - 160
+    - 110
+    MaxSick:
+    - 1000
+    - 500
+    - 700
+    - 1000
+    NeededToHealWounds:
+    - 30
+    - 10
+    - 10
+    - 10
+    NeededToGrow:
+    - 200
+    - 200
+    - 400
+    - 10000
     AmountInPlant: 300
-    AmountConsumed: 130
-    MinSick: 100
-    MaxSick: 500
-    NeededToHealWounds: 0
-    NeededToGrow: 0
     IsSick: 0
     NutrientInfo: {fileID: 11400000, guid: 2ad81f3d08b5bdc428dce0c5f8339035, type: 2}
   - Name: Carbon
-    AbsorptionRatePercent: 100
-    AbsorptionRateMin: 0
-    AmountInPlant: 0
-    AmountConsumed: 0
-    MinSick: -1
-    MaxSick: 100
-    NeededToHealWounds: 0
-    NeededToGrow: 0
+    AbsorptionRatePercent:
+    - 10
+    - 0
+    - 0
+    - 0
+    AbsorptionRateMin:
+    - 0
+    - 10
+    - 20
+    - 10
+    AmountConsumed:
+    - 0
+    - 0
+    - 0
+    - 0
+    MinSick:
+    - 0
+    - 0
+    - 0
+    - 0
+    MaxSick:
+    - 100
+    - 60
+    - 100
+    - 100
+    NeededToHealWounds:
+    - 20
+    - 2
+    - 3
+    - 3
+    NeededToGrow:
+    - 20
+    - 40
+    - 60
+    - 10000
+    AmountInPlant: 10
     IsSick: 0
     NutrientInfo: {fileID: 11400000, guid: 5624b331d5b1d4d4085257ba9abf246b, type: 2}
   Sprite: {fileID: 561840754}
-  _daysHealthyToGrow: 0
-  _daysHealthyToFlower: 0
-  numOfGrowthStages: 0
+  WoundsToPreventGrowth: 5
+  WoundsToKill: 20
+  _daysHealthyToGrow: 3
+  _daysHealthyToFlower: 2
+  numOfGrowthStages: 3
+  sprites:
+  - {fileID: 370141571, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
+  - {fileID: 1816561890, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
+  - {fileID: -1811296406, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
+  - {fileID: 333666634, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
 --- !u!212 &561840754
 SpriteRenderer:
   serializedVersion: 2
@@ -1777,7 +1840,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f1762dbb167c5f548ace683dbb96c98d, type: 3}
+  m_Sprite: {fileID: 370141571, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

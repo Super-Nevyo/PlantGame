@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlantNutrient
 {
     public string Name;
-    public float AbsorptionRatePercent, AbsorptionRateMin, AmountInPlant, AmountConsumed, MinSick, MaxSick, NeededToHealWounds, NeededToGrow;
+    public float[] AbsorptionRatePercent, AbsorptionRateMin, AmountConsumed, MinSick, MaxSick, NeededToHealWounds, NeededToGrow;
+    public float AmountInPlant;
     [HideInInspector] public bool IsSick = false;
     public NutrientInformation NutrientInfo;
     private PlantBase plant;
@@ -13,22 +14,22 @@ public class PlantNutrient
     {
         this.plant = plant;
     }
-    public bool CheckNutrient()
+    public bool CheckNutrient(int Stage)
     {
-        if (AmountInPlant < AmountConsumed)
+        if (AmountInPlant < AmountConsumed[Stage])
         {
             AmountInPlant = 0;
         }
         else
         {
-            AmountInPlant -= AmountConsumed;
+            AmountInPlant -= AmountConsumed[Stage];
         }
-        if (AmountInPlant < MinSick)
+        if (AmountInPlant < MinSick[Stage])
         {
             _nutrientStatus = IsNutrientMakingPlantSick.NUTRIENT_TOO_LOW;
             return false;
         }
-        else if (AmountInPlant > MaxSick) {
+        else if (AmountInPlant > MaxSick[Stage]) {
             _nutrientStatus = IsNutrientMakingPlantSick.NUTRIENT_TOO_HIGH;
             return false; 
         }
@@ -38,12 +39,12 @@ public class PlantNutrient
             return true;
         }
     }
-    public float AbsorbNutrient(float amount)
+    public float AbsorbNutrient(float amount, int Stage)
     {
-        if (amount > AbsorptionRateMin)
+        if (amount > AbsorptionRateMin[Stage])
         {
-            AmountInPlant += AbsorptionRateMin + (amount - AbsorptionRateMin) * AbsorptionRatePercent / 100;
-            return AbsorptionRateMin + (amount - AbsorptionRateMin) * AbsorptionRatePercent / 100;
+            AmountInPlant += AbsorptionRateMin[Stage] + (amount - AbsorptionRateMin[Stage]) * AbsorptionRatePercent[Stage] / 100;
+            return AbsorptionRateMin[Stage] + (amount - AbsorptionRateMin[Stage]) * AbsorptionRatePercent[Stage] / 100;
         }
         else
         {
@@ -65,7 +66,7 @@ public class PlantNutrient
 
     public bool CheckIfWoundCanBeHealed(int Level)
     {
-        if (AmountInPlant >= NeededToHealWounds * Level)
+        if (AmountInPlant >= NeededToHealWounds[plant.GrowthStage] * Level)
         {
             return true;
         }
@@ -74,13 +75,13 @@ public class PlantNutrient
             return false;
         }
     }
-    public void HealWound(int Level)
+    public void HealWound(int Stage)
     {
-        AmountInPlant -= NeededToHealWounds * Level;
+        AmountInPlant -= NeededToHealWounds[Stage];
     }
-    public bool CheckIfPlantCanGrow(int Level)
+    public bool CheckIfPlantCanGrow(int Stage)
     {
-        if (AmountInPlant >= NeededToGrow * Level)
+        if (AmountInPlant >= NeededToGrow[Stage])
         {
             return true;
         }
@@ -89,8 +90,8 @@ public class PlantNutrient
             return false;
         }
     }
-    public void ConsumeNutrientsForGrowth(int Level)
+    public void ConsumeNutrientsForGrowth(int Stage)
     {
-        AmountInPlant -= NeededToGrow * Level;
+        AmountInPlant -= NeededToGrow[Stage];
     }
 }

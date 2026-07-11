@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.AdaptivePerformance.Provider.AdaptivePerformanceSubsystemDescriptor;
 
 public class Pot : MonoBehaviour
 {
