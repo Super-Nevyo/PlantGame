@@ -4,10 +4,12 @@ public class PotNutrient
 {
     public string Name;
     public float AmountInPot;
+    public NutrientInformation NutrientInformation;
 
-    public PotNutrient(string name, float amountInPot)
+    public PotNutrient(NutrientInformation connectedNutrient, float amountInPot)
     {
-        Name = name;
+        Name = connectedNutrient.Name;
         AmountInPot = amountInPot;
+        NutrientInformation = connectedNutrient;
     }
 }

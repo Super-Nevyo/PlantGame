@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlantBase : MonoBehaviour
@@ -5,6 +6,14 @@ public class PlantBase : MonoBehaviour
     [SerializeField] protected PlantNutrient[] nutrients;
     private Pot _pot;
     public SpriteRenderer Sprite;
+    private List<int> _plantWounds = new List<int>();
+    private int _nutrientYes;
+    private int _daysHealthy;
+    [SerializeField] private int _daysHealthyToGrow;
+    [SerializeField] private int _daysHealthyToFlower;
+    private bool _hasNutrientsToGrow;
+    public int GrowthStage { get; private set; } = 0;
+    [SerializeField] private int numOfGrowthStages;
 
 
     private void Start()
@@ -18,9 +27,13 @@ public class PlantBase : MonoBehaviour
     }
     public void DoNightCycle()
     {
+        Debug.Log("NightCycle Happened");
+        HealWounds(); // plants need the whole night to heal wounds so wont use the absorbed nutrients, just the ones that were already in the plant
+        // do all nutrient checks
+        _nutrientYes = 0;
         foreach (var n in nutrients)
         {
-            _pot.PullNutrient(n.Name, n.AbsorbNutrient(_pot.PullNutrient(n.Name)));
+            _pot.PullNutrient(n.NutrientInfo, n.AbsorbNutrient(_pot.PullNutrient(n.NutrientInfo)));
             if (n.CheckNutrient())
             {
                 // plant is not sick
@@ -31,32 +44,59 @@ public class PlantBase : MonoBehaviour
                 // Plant is sick
                 if (!n.IsSick) n.MakePlantSick(); // if plant was healthy, make it sick
             }
-
+            if(n.CheckIfPlantCanGrow(GrowthStage))
+            {
+                _nutrientYes++;
+            }
         }
+        if (_nutrientYes == nutrients.Length)
+            _hasNutrientsToGrow = true;
+        else
+            _hasNutrientsToGrow = false;
+        
         if (IsReadyToGrow())
         {
             GrowPlant();
         }
         if (IsReadyToFlower())
         {
-            //FlowerPlant();
+            FlowerPlant();
         }
     }
-    public void GrowPlant()
+    protected void GrowPlant()
     {
-
+        foreach (var n in nutrients)
+        {
+            n.ConsumeNutrientsForGrowth(GrowthStage);
+        }
     }
-    public void WaterPlant()
+    protected void FlowerPlant()
     {
 
     }
     
-    public bool IsReadyToGrow()
+    protected virtual bool IsReadyToGrow()
     {
+        if (_daysHealthy >= _daysHealthyToGrow && _hasNutrientsToGrow && numOfGrowthStages < GrowthStage && SpecialGrowthConditions())
+        {
+            ResetHealthyDays();
+            return true;
+        }
+        else
         return false;
     }
-    public bool IsReadyToFlower()
+    protected virtual bool SpecialGrowthConditions()
     {
+        return true;
+    }
+    protected virtual bool IsReadyToFlower()
+    {
+        if(_daysHealthy >= _daysHealthyToFlower)
+        {
+            ResetHealthyDays();
+            return true;
+        }
+        else
         return false;
     }
     public void WriteStats()
@@ -71,5 +111,40 @@ public class PlantBase : MonoBehaviour
         {
             Debug.Log(n.Name + ": " + n.AmountInPot);
         }
+    }
+    private void Wounded(int level)
+    {
+        _plantWounds.Add(level);
+    }
+    private void HealWounds()
+    {
+        for (int i = 0; i < _plantWounds.Count; i++)
+        {
+            _nutrientYes = 0;
+            foreach (var n in nutrients)
+            {
+                if (n.CheckIfWoundCanBeHealed(_plantWounds[i]))
+                {
+                    _nutrientYes++;
+                }
+            }
+            if (_nutrientYes == nutrients.Length)
+            {
+                _plantWounds[i]--;
+            }
+            else
+            {
+                return;
+            }
+
+            if (_plantWounds[i] <= 0)
+            {
+                _plantWounds.RemoveAt(i);
+            }
+        }
+    }
+    public void ResetHealthyDays()
+    {
+        _daysHealthy = 0;
     }
 }
