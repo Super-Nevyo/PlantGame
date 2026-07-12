@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class PlantBase : MonoBehaviour
@@ -18,7 +17,8 @@ public class PlantBase : MonoBehaviour
     private bool _hasNutrientsToGrow;
     public int GrowthStage { get; private set; } = 1;
     [SerializeField] private int numOfGrowthStages;
-    [SerializeField] private Sprite[] sprites; 
+    [SerializeField] private Sprite[] sprites;
+    private float _mlofSap = 500;
 
 
     private void Start()
@@ -171,5 +171,30 @@ public class PlantBase : MonoBehaviour
     public void KillPlant()
     {
 
+    }
+    public (float, PotNutrient[]) PullSap(float MlSap)
+    {
+        PotNutrient[] givenNutrients = new PotNutrient[nutrients.Length];
+        if (MlSap < _mlofSap)
+        {
+            Wounded(Mathf.CeilToInt(MlSap * 5 / _mlofSap));
+            for (int i = 0; i < nutrients.Length; i++)
+            {
+                givenNutrients[i] = new PotNutrient(nutrients[i].NutrientInfo, nutrients[i].pullSap(MlSap / _mlofSap));
+            }
+            _mlofSap -= MlSap;
+            _mlofSap = 500; // this is temp to reset the sap, will be changed when the sap is implemented in the game, this is just to test the nutrient pulling
+            return (MlSap, givenNutrients);
+        }
+        else
+        {
+            Wounded(5);
+            for (int i = 0; i < nutrients.Length; i++)
+            {
+                givenNutrients[i] = new PotNutrient(nutrients[i].NutrientInfo, nutrients[i].pullSap(1));
+            }
+            _mlofSap = 0;
+            return (_mlofSap, givenNutrients);
+        }
     }
 }

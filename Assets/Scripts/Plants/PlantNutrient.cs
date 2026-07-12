@@ -1,3 +1,5 @@
+using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 [System.Serializable]
 public class PlantNutrient
@@ -93,5 +95,19 @@ public class PlantNutrient
     public void ConsumeNutrientsForGrowth(int Stage)
     {
         AmountInPlant -= NeededToGrow[Stage];
+    }
+    public float pullSap(float fraction)
+    {
+        AmountInPlant -= AmountInPlant * fraction;
+        return AmountInPlant / (1 - fraction) * fraction;// dont want to use a temp variable so this gives back amount * fraction because of math, trust
+        //so since you dont trust me, n is the new amount which we know, a is the origional amount that we dont know anymore and f is the fraction
+        //n = a - (a * f)
+        //and
+        //n = a(1 - f) because you can distribute the a
+        //so
+        //n / (1 - f) = a(1 - f) / (1 - f)
+        //n / (1 - f) = a
+        //and we are looking for a* f so you can just mulitply f to both sides getting
+        //n * f / (1 - f) is the information we want
     }
 }

@@ -2179,6 +2179,8 @@ MonoBehaviour:
   nutrients:
   - {fileID: 11400000, guid: 2ad81f3d08b5bdc428dce0c5f8339035, type: 2}
   - {fileID: 11400000, guid: 5624b331d5b1d4d4085257ba9abf246b, type: 2}
+  - {fileID: 11400000, guid: 51ae23a1a9c4d2445b63c4a1fc3b9504, type: 2}
+  - {fileID: 11400000, guid: 5be9072946de9f54bb8dc723dd316441, type: 2}
 --- !u!4 &1105076639
 Transform:
   m_ObjectHideFlags: 0

@@ -39,12 +39,12 @@ public class Jar : MonoBehaviour
 
     private void ChangeColour(Vector4 addColour, float amount)
     {
-        _colour += amount / 2550 * addColour;
+        _colour += amount / 255 * addColour;
         _spriteRenderer.color = _colour;
     }
     private void RemoveColour()
     {
-        _colour = new Vector4(0, 0, 0, 1);
+        _colour = new Vector4(0.5f, 0.5f, 0.5f, 1);
         _spriteRenderer.color = _colour;
     }
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffa767b5a8e0264fb911dc8c72152f1, type: 3}
+  m_Name: Potassium
+  m_EditorClassIdentifier: Assembly-CSharp::NutrientInformation
+  Name: Potassium
+  ChangeColour: 0
+  ChangeSaturation: 0
+  LoseGrowthStage: 1
+  LeafHoles: 1
+  InstantDeath: 0
+  RestrictNutrientIntake: 0
+  ChangeColourHigh: 0
+  ChangeSaturationHigh: 0
+  LoseGrowthStageHigh: 0
+  LeafHolesHigh: 0
+  InstantDeathHigh: 1
+  RestrictNutrientIntakeHigh: 0
+  NutrientColour: {r: 0.42284012, g: 0.18676074, b: 0.44654083, a: 0}
+  Saturation: {r: 0, g: 0, b: 0, a: 0}
