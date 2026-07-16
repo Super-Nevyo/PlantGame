@@ -5,7 +5,8 @@ public class CameraManager : MonoBehaviour
     public CameraStateMachine MyStateMachine;
     public Room CurrentRoom;
     public GameObject CameraPivot;
-    public (Vector3, Quaternion, float) PreviousCamLocation;
+    public float ObjectiveRotation;
+    [SerializeField] public float RotationSpeed;
     private void Awake()
     {
         MyStateMachine = new CameraStateMachine(this);
@@ -18,13 +19,13 @@ public class CameraManager : MonoBehaviour
     {
         MyStateMachine.Disable();
     }
+    private void FixedUpdate()
+    {
+        MyStateMachine.Execute();
+    }
     public void ChangeCamRoom(Room newRoom)
     {
         CurrentRoom = newRoom;
         MyStateMachine.ChangeState(MyStateMachine.RoomsState);
-    }
-    public void SetCameraPosition(Vector3 pivot, Quaternion pivotRotation, float camDistance)
-    {
-        PreviousCamLocation = (Vector3.zero, Quaternion.identity, 0);
     }
 }
