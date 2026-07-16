@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WalkState : IState
@@ -7,6 +8,7 @@ public class WalkState : IState
     private Vector2 _actualDirection;
     private IInteractable _interactable;
     private RaycastHit _interactionHit;
+    private bool _didHit;
 
     public WalkState(PlayerController player)
     {
@@ -38,10 +40,16 @@ public class WalkState : IState
     }
     public void Interact()
     {
-        if (Physics.BoxCast(2 * _player.transform.forward, new Vector3(2, 2, 2), _player.transform.forward, out _interactionHit)) { 
-        _interactable = _interactionHit.collider.GetComponent<IInteractable>();
-        if (_interactable != null) { _interactable.OnInteract(); Debug.Log("Interacted"); }
+        Debug.Log("InteractAttempted");
+        if(_player.DoInteractBoxCast())
+        {
+            _player.RayHit = _interactionHit;
+            Debug.Log("hit");
+            // TODO: why is this causing an error
+            _interactable = _player.RayHit.collider.GetComponent<IInteractable>();
+            if (_interactable != null) { _interactable.OnInteract(); Debug.Log("Interacted"); }
         }
     }
+    
     
 }

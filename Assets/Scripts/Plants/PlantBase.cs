@@ -27,9 +27,17 @@ public class PlantBase : MonoBehaviour
         {
             n.Initialization(this);
         }
-        GameManager.instance.DayNight += DoNightCycle;
+        
         _pot = GetComponentInParent<Pot>();
         Sprite.sprite = sprites[GrowthStage];
+    }
+    private void OnEnable()
+    {
+        EventManager.NightEvent += DoNightCycle;
+    }
+    private void OnDisable()
+    {
+        EventManager.NightEvent -= DoNightCycle;
     }
     public void DoNightCycle()
     {

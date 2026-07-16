@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody RB;
@@ -7,6 +7,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _camLocation;
     public Vector3 Velocity;
     [SerializeField] public float Speed;
+    [Header("InteractionBoxCast")]
+    [SerializeField] private float boxStartDistance;
+    [SerializeField] private Vector3 halfExtent;
+    [SerializeField] private float maxDistance;
+    public RaycastHit RayHit;
+    private bool _didHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,4 +37,18 @@ public class PlayerController : MonoBehaviour
         Vector2 LocalVector = new Vector2(_camLocation.forward.x, _camLocation.forward.z);
         return (direction.y * LocalVector + direction.x * new Vector2(LocalVector.y,-LocalVector.x)).normalized;
     }
+
+    public bool DoInteractBoxCast()
+    {
+        _didHit = (Physics.BoxCast(boxStartDistance * transform.forward + transform.position, halfExtent, transform.forward, out RayHit, transform.rotation, maxDistance));
+        Debug.Log(RayHit.collider);
+        return _didHit;
+    }
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(boxStartDistance * transform.forward + transform.position, halfExtent);
+        Gizmos.DrawWireCube((boxStartDistance + maxDistance) * transform.forward + transform.position, halfExtent);
+    }
+#endif
 }
