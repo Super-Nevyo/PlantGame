@@ -7,6 +7,7 @@ public class PlayerStateMachine
 
     public IdleState idleState;
     public WalkState walkState;
+    public InteractState interactState;
 
 
     public PlayerStateMachine(PlayerController player)
@@ -14,6 +15,7 @@ public class PlayerStateMachine
         _player = player;
         idleState = new IdleState(player);
         walkState = new WalkState(player);
+        interactState = new InteractState(player);
     }
 
     public void Initialize(IState state)
