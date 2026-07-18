@@ -1869,8 +1869,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   plantCanvas: {fileID: 1731965554}
   plantStats: {fileID: 1323916791}
-  winCanvas: {fileID: 0}
-  loseCanvas: {fileID: 0}
+  winCanvas: {fileID: 1161882112}
+  loseCanvas: {fileID: 2015859502}
 --- !u!1 &434043919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,7 +2280,7 @@ MonoBehaviour:
   - {fileID: 1816561890, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
   - {fileID: -1811296406, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
   - {fileID: 333666634, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
-  daysSickToDie: 0
+  daysSickToDie: 5
   UI: {fileID: 425939544}
 --- !u!212 &561840754
 SpriteRenderer:
@@ -4539,7 +4539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1731965555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4724,7 +4724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2015859503
 MonoBehaviour:
   m_ObjectHideFlags: 0
