@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour
     }
     public void ChangeCamRoom(Room newRoom)
     {
-        if (CurrentRoom != null)
+        if (CurrentRoom.ConnectedRooms != null)
         ObjectiveRotation = CurrentRoom.attachedRoomDefaultRotations[Array.IndexOf(CurrentRoom.ConnectedRooms, newRoom)];
         CurrentRoom = newRoom;
         MyStateMachine.ChangeState(MyStateMachine.RoomsState);

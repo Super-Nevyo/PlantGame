@@ -12,12 +12,11 @@ public class InteractState : IState
     public void Enter()
     {
         Debug.Log("Enter InteractState");
-        EventManager.EnterInteractStateEvent += ExitInteract;
+        EventManager.InteractAction += ExitInteract;
     }
     public void Exit()
     {
-        Debug.Log("Exit InteractState");
-        EventManager.EnterInteractStateEvent -= ExitInteract;
+        EventManager.InteractAction -= ExitInteract;
         GameManager.instance.DeslectInteractionTarget();
     }
     public void Update()
@@ -27,5 +26,6 @@ public class InteractState : IState
     public void ExitInteract()
     {
         EventManager.ExitInteract();
+        _player.MyStateMachine.ChangeState(_player.MyStateMachine.walkState);
     }
 }

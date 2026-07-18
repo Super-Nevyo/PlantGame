@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlantBase : MonoBehaviour
@@ -12,6 +14,7 @@ public class PlantBase : MonoBehaviour
     public int WoundsToKill;
     private int _nutrientYes;
     private int _daysHealthy;
+    private int _daysSick;
     [SerializeField] private int _daysHealthyToGrow;
     [SerializeField] private int _daysHealthyToFlower;
     private bool _hasNutrientsToGrow;
@@ -19,6 +22,11 @@ public class PlantBase : MonoBehaviour
     [SerializeField] private int numOfGrowthStages;
     [SerializeField] private Sprite[] sprites;
     private float _mlofSap = 500;
+    [SerializeField] private float daysSickToDie;
+    private bool _isPlantDead;
+
+    //remove when information communication is solved
+    [SerializeField] UIManager UI;
 
 
     private void Start()
@@ -41,7 +49,10 @@ public class PlantBase : MonoBehaviour
     }
     public void DoNightCycle()
     {
+        if(_isPlantDead) return;
         Debug.Log("NightCycle Happened");
+        if (_daysHealthy <= 0) _daysSick++;
+        else _daysSick = 0;
         _daysHealthy++;
         HealWounds(); // plants need the whole night to heal wounds so wont use the absorbed nutrients, just the ones that were already in the plant
         _totalWounds = 0;
@@ -65,6 +76,8 @@ public class PlantBase : MonoBehaviour
             {
                 // Plant is sick
                 if (!n.IsSick) n.MakePlantSick(); // if plant was healthy, make it sick
+
+                if (n.SickCausesDeath) ResetHealthyDays();
             }
             if(n.CheckIfPlantCanGrow(GrowthStage))
             {
@@ -84,6 +97,10 @@ public class PlantBase : MonoBehaviour
         {
             FlowerPlant();
         }
+        if (ShouldPlantDie())
+        {
+            KillPlant();
+        }
     }
     protected void GrowPlant()
     {
@@ -94,9 +111,9 @@ public class PlantBase : MonoBehaviour
         GrowthStage++;
         Sprite.sprite = sprites[GrowthStage];
     }
-    protected void FlowerPlant()
+    protected virtual void FlowerPlant()
     {
-
+        // TODO: make this do something
     }
     
     protected virtual bool IsReadyToGrow()
@@ -130,16 +147,32 @@ public class PlantBase : MonoBehaviour
     }
     public void WriteStats()
     {
+        if (_isPlantDead)
+        {
+            UI.LoseGame();
+            return;
+        }
+        if (GrowthStage == 3)
+        {
+            UI.WinGame();
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.Append("PlantStats:");
         Debug.Log("Plant:");
         foreach (var n in nutrients)
         {
             Debug.Log(n.Name + ": " + n.AmountInPlant);
+            sb.AppendLine(n.Name + ": " + n.AmountInPlant);
         }
+        sb.AppendLine("Pot:");
         Debug.Log("Pot:");
         foreach(var n in _pot.Nutrients)
         {
             Debug.Log(n.Name + ": " + n.AmountInPot);
+            sb.AppendLine(n.Name + ": " + n.AmountInPot);
         }
+        UI.DisplayPlantStats(sb.ToString());
     }
     private void Wounded(int level)
     {
@@ -176,9 +209,15 @@ public class PlantBase : MonoBehaviour
     {
         _daysHealthy = 0;
     }
-    public void KillPlant()
+    protected virtual bool ShouldPlantDie()
     {
-
+        if (_daysSick >= daysSickToDie) return true;
+        return false;
+    }
+    public virtual void KillPlant()
+    {
+        _isPlantDead = true;
+        Sprite.color = Color.black;
     }
     public (float, PotNutrient[]) PullSap(float MlSap)
     {

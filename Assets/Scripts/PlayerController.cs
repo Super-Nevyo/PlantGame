@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public bool DoInteractBoxCast()
     {
+        // raycasting is weird, not sure if i fully understand
         _didHit = (Physics.BoxCast(boxStartDistance * transform.forward + transform.position, halfExtent, transform.forward, out RayHit, transform.rotation, maxDistance,LayerMask.GetMask("Interactable")));
         Debug.Log(RayHit.collider);
         Interactable = RayHit.collider?.GetComponent<IInteractable>();
@@ -49,8 +50,8 @@ public class PlayerController : MonoBehaviour
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(boxStartDistance * transform.forward + transform.position, halfExtent);
-        Gizmos.DrawWireCube((boxStartDistance + maxDistance) * transform.forward + transform.position, halfExtent);
+        Gizmos.DrawWireCube(boxStartDistance * transform.forward + transform.position, 2 * halfExtent);
+        Gizmos.DrawWireCube((boxStartDistance + maxDistance) * transform.forward + transform.position, 2 * halfExtent);
     }
 #endif
 }

@@ -14,8 +14,9 @@ public class CSInteract : IState
     public void Enter()
     {
         EventManager.ExitInteractStateEvent += ExitInteract;
-        //_pivotLocation = GameManager.instance.InteractionTarget.transform.position;
         (_camDistance, _pivotRotation, _pivotLocation) = GameManager.instance.InteractionTarget.GetCamLocation();
+        _repositioned = false;
+        Debug.Log("camEntered Interact");
     }
 
     public void Exit()
