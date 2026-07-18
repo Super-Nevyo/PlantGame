@@ -23,6 +23,11 @@ public class PlayerStateMachine
         currentState = state;
         state.Enter();
     }
+    public void Disable()
+    {
+        currentState.Exit();
+        currentState = null;
+    }
 
     public void ChangeState(IState state)
     {

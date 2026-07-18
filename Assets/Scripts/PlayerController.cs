@@ -20,6 +20,17 @@ public class PlayerController : MonoBehaviour
         MyStateMachine.Initialize(MyStateMachine.idleState);
         RB = GetComponent<Rigidbody>();
     }
+    void OnEnable()
+    {
+        if (MyStateMachine != null && MyStateMachine.currentState == null)
+        {
+            MyStateMachine.Initialize(MyStateMachine.idleState);
+        }
+    }
+    void OnDisable()
+    {
+        MyStateMachine.Disable();
+    }
 
     // Update is called once per frame
     void Update()
