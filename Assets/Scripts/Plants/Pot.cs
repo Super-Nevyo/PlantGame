@@ -6,6 +6,7 @@ public class Pot : MonoBehaviour, IInteractable
     public PotNutrient[] Nutrients;
     [SerializeField] private float camDistance;
     [SerializeField] private Quaternion camRotation;
+    [SerializeField] private float camYOffset;
 
     public float PullNutrient(NutrientInformation info)
     {
@@ -62,9 +63,9 @@ public class Pot : MonoBehaviour, IInteractable
         GameManager.instance.SelectInteractionTarget(this, this);
         EventManager.InteractionHappened();
     }
-    public (float, Quaternion) GetCamLocation()
+    public (float, Quaternion, Vector3) GetCamLocation()
     {
-        return (camDistance, camRotation);
+        return (camDistance, camRotation, transform.position + camYOffset * Vector3.up);
     }
 
 }

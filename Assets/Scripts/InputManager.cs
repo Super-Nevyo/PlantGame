@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public System.Action<Vector2> MoveAction;
-    public System.Action InteractAction;
-    public System.Action JumpAction;
-
+    
     public static InputManager instance;
 
     public void Awake()
@@ -18,15 +15,19 @@ public class InputManager : MonoBehaviour
 
     public void OnJump()
     {
-        JumpAction?.Invoke();
+        EventManager.OnJump();
     }
     public void OnMove(UnityEngine.InputSystem.InputValue value)
     {
-        MoveAction?.Invoke(value.Get<Vector2>());
+        EventManager.OnMove(value.Get<Vector2>());
+    }
+    public void OnLook(UnityEngine.InputSystem.InputValue value)
+    {
+        EventManager.OnLook(value.Get<float>());
     }
     public void OnInteract()
     {
-        InteractAction?.Invoke();
+        EventManager.OnInteract();
     }
 
 }

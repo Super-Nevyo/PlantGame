@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: BigHall2
   m_EditorClassIdentifier: Assembly-CSharp::Room
   Name: BigHall2
-  CanCamRotate: 0
+  CanCamRotate: 1
   ConnectedRooms:
   - {fileID: 11400000, guid: 79b730c377955f9408d4dd940f0e3d64, type: 2}
   - {fileID: 11400000, guid: bbb88f979520f8e4cbe9f53fedd8b201, type: 2}
-  attachedRoomDefaultRotations: []
-  HalfExtent: {x: 25, y: 5, z: 8}
-  CamDefaultRotation: 90
-  RoomCenter: {x: -23, y: 2.5, z: 0}
+  attachedRoomDefaultRotations:
+  - 180
+  - 90
+  HalfExtent: {x: 12.5, y: 2.5, z: 4}
+  CamDefaultRotation: 180
+  RoomCenter: {x: -25, y: 2.5, z: 0}

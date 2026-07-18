@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxDistance;
     public RaycastHit RayHit;
     private bool _didHit;
+    public IInteractable Interactable;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,8 +41,9 @@ public class PlayerController : MonoBehaviour
 
     public bool DoInteractBoxCast()
     {
-        _didHit = (Physics.BoxCast(boxStartDistance * transform.forward + transform.position, halfExtent, transform.forward, out RayHit, transform.rotation, maxDistance));
+        _didHit = (Physics.BoxCast(boxStartDistance * transform.forward + transform.position, halfExtent, transform.forward, out RayHit, transform.rotation, maxDistance,LayerMask.GetMask("Interactable")));
         Debug.Log(RayHit.collider);
+        Interactable = RayHit.collider?.GetComponent<IInteractable>();
         return _didHit;
     }
 #if UNITY_EDITOR

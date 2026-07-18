@@ -6,9 +6,6 @@ public class WalkState : IState
     private PlayerController _player;
     private Vector2 _walkDirection;
     private Vector2 _actualDirection;
-    private IInteractable _interactable;
-    private RaycastHit _interactionHit;
-    private bool _didHit;
 
     public WalkState(PlayerController player)
     {
@@ -17,14 +14,16 @@ public class WalkState : IState
 
     public void Enter()
     {
-        InputManager.instance.MoveAction += OnWalk;
-        InputManager.instance.InteractAction += Interact;
+        EventManager.MoveAction += OnWalk;
+        EventManager.InteractAction += Interact;
+        EventManager.EnterInteractStateEvent += EnterInteract;
         Debug.Log("Enter WalkState");
     }
     public void Exit()
     {
-        InputManager.instance.MoveAction -= OnWalk;
-        InputManager.instance.InteractAction -= Interact;
+        EventManager.MoveAction -= OnWalk;
+        EventManager.InteractAction -= Interact;
+        EventManager.EnterInteractStateEvent -= EnterInteract;
         OnWalk(Vector2.zero);
         Debug.Log("Exit WalkState");
     }
@@ -43,12 +42,14 @@ public class WalkState : IState
         Debug.Log("InteractAttempted");
         if(_player.DoInteractBoxCast())
         {
-            _player.RayHit = _interactionHit;
             Debug.Log("hit");
-            // TODO: why is this causing an error
-            _interactable = _player.RayHit.collider.GetComponent<IInteractable>();
-            if (_interactable != null) { _interactable.OnInteract(); Debug.Log("Interacted"); }
+            _player.Interactable?.OnInteract();
         }
+    }
+    public void EnterInteract()
+    {
+        Debug.Log("Entering Interact State");
+        _player.MyStateMachine.ChangeState(_player.MyStateMachine.interactState);
     }
     
     
