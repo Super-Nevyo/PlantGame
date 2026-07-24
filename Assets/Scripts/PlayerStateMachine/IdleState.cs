@@ -19,7 +19,7 @@ public class IdleState : IState
     }
     public void Update()
     {
-
+        _player.MyStateMachine.ChangeState(_player.MyStateMachine.walkState);
     }
 
 

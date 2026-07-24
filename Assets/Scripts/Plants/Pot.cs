@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
 
-public class Pot : MonoBehaviour
+public class Pot : MonoBehaviour, IInteractable
 {
     public PotNutrient[] Nutrients;
+    [SerializeField] private float camDistance;
+    [SerializeField] private Quaternion camRotation;
+    [SerializeField] private float camYOffset;
 
     public float PullNutrient(NutrientInformation info)
     {
@@ -52,6 +55,17 @@ public class Pot : MonoBehaviour
             nutrient.AmountInPot += n.AmountInPot;
             n.AmountInPot = 0;
         }
+    }
+
+    public void OnInteract()
+    {
+        Debug.Log("interacted with a pot");
+        GameManager.instance.SelectInteractionTarget(this, this);
+        EventManager.InteractionHappened();
+    }
+    public (float, Quaternion, Vector3) GetCamLocation()
+    {
+        return (camDistance, camRotation, transform.position + camYOffset * Vector3.up);
     }
 
 }
