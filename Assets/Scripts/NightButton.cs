@@ -4,6 +4,6 @@ public class NightButton : MonoBehaviour
 {
     public void OnPress()
     {
-        GameManager.instance.DoDayNight();
+        GameManager.Instance.DoDayNight();
     }
 }

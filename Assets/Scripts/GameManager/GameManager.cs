@@ -1,14 +1,9 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public IInteractable InteractionTarget { get; private set; }
     public Pot SelectedPot { get; private set; }
-    public static GameManager instance;
-    public void Awake()
-    {
-        instance = this;
-    }
 
     public void DoDayNight()
     {

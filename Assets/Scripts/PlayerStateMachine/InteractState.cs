@@ -17,7 +17,7 @@ public class InteractState : IState
     public void Exit()
     {
         EventManager.InteractAction -= ExitInteract;
-        GameManager.instance.DeslectInteractionTarget();
+        GameManager.Instance.DeslectInteractionTarget();
     }
     public void Update()
     {

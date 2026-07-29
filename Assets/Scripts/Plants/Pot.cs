@@ -60,7 +60,7 @@ public class Pot : MonoBehaviour, IInteractable
     public void OnInteract()
     {
         Debug.Log("interacted with a pot");
-        GameManager.instance.SelectInteractionTarget(this, this);
+        GameManager.Instance.SelectInteractionTarget(this, this);
         EventManager.InteractionHappened();
     }
     public (float, Quaternion, Vector3) GetCamLocation()
