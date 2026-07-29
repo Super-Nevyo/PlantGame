@@ -11,7 +11,6 @@ public class JarAdder : MonoBehaviour
 
     public void AddToJar()
     {
-        Debug.Log("pourNutrients");
         jar.AddNutrient(new PotNutrient(_selectedNutrient, 20));
     }
     void Start()

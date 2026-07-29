@@ -14,7 +14,6 @@ public class Jar : MonoBehaviour
     public void AddNutrient(PotNutrient nutrient)
     {
         Debug.Log("nutrient added to jar: " + nutrient.Name);
-        Debug.Log(_colour);
         PotNutrient n = Array.Find(_nutrients, x => x.Name == nutrient.Name);
         if (n == null)
         {

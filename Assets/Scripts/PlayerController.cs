@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         // raycasting is weird, not sure if i fully understand
         _didHit = (Physics.BoxCast(boxStartDistance * transform.forward + transform.position, halfExtent, transform.forward, out RayHit, transform.rotation, maxDistance,LayerMask.GetMask("Interactable")));
-        Debug.Log(RayHit.collider);
         Interactable = RayHit.collider?.GetComponent<IInteractable>();
         return _didHit;
     }

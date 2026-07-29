@@ -1948,6 +1948,35 @@ MonoBehaviour:
     - 200
     - 400
     - 10000
+    PlantNutrientStages:
+    - AbsorptionRatePercent: 20
+      AbsorptionRateMin: 0
+      AmountConsumed: 0
+      MinSick: 100
+      MaxSick: 1000
+      NeededToHealWounds: 30
+      NeededToGrow: 200
+    - AbsorptionRatePercent: 10
+      AbsorptionRateMin: 100
+      AmountConsumed: 130
+      MinSick: 150
+      MaxSick: 500
+      NeededToHealWounds: 10
+      NeededToGrow: 200
+    - AbsorptionRatePercent: 15
+      AbsorptionRateMin: 110
+      AmountConsumed: 150
+      MinSick: 160
+      MaxSick: 700
+      NeededToHealWounds: 10
+      NeededToGrow: 400
+    - AbsorptionRatePercent: 10
+      AbsorptionRateMin: 100
+      AmountConsumed: 110
+      MinSick: 110
+      MaxSick: 1000
+      NeededToHealWounds: 10
+      NeededToGrow: 1000
     AmountInPlant: 300
     SickCausesDeath: 1
     IsSick: 0
@@ -1988,6 +2017,35 @@ MonoBehaviour:
     - 40
     - 60
     - 10000
+    PlantNutrientStages:
+    - AbsorptionRatePercent: 10
+      AbsorptionRateMin: 0
+      AmountConsumed: 0
+      MinSick: 0
+      MaxSick: 100
+      NeededToHealWounds: 20
+      NeededToGrow: 20
+    - AbsorptionRatePercent: 0
+      AbsorptionRateMin: 10
+      AmountConsumed: 0
+      MinSick: 0
+      MaxSick: 60
+      NeededToHealWounds: 2
+      NeededToGrow: 40
+    - AbsorptionRatePercent: 0
+      AbsorptionRateMin: 20
+      AmountConsumed: 0
+      MinSick: 0
+      MaxSick: 100
+      NeededToHealWounds: 3
+      NeededToGrow: 60
+    - AbsorptionRatePercent: 0
+      AbsorptionRateMin: 10
+      AmountConsumed: 0
+      MinSick: 0
+      MaxSick: 100
+      NeededToHealWounds: 3
+      NeededToGrow: 10000
     AmountInPlant: 10
     SickCausesDeath: 0
     IsSick: 0
@@ -1997,7 +2055,7 @@ MonoBehaviour:
   WoundsToKill: 20
   _daysHealthyToGrow: 3
   _daysHealthyToFlower: 2
-  numOfGrowthStages: 3
+  <NumOfGrowthStages>k__BackingField: 3
   sprites:
   - {fileID: 370141571, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}
   - {fileID: 1816561890, guid: 12442431645fde541ae08aa2c0ea5fb3, type: 3}

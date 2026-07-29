@@ -45,7 +45,6 @@ public class CSRooms : IState
             cameraManager.CameraPivot.transform.position = Vector3.Lerp(cameraManager.CameraPivot.transform.position, room.RoomCenter, 0.2f);
             if ((cameraManager.CameraPivot.transform.position - room.RoomCenter).sqrMagnitude < 0.1)
             {
-                Debug.Log("PivotLocked");
                 cameraManager.CameraPivot.transform.position = room.RoomCenter;
                 CamPivotMoved = true;
             }

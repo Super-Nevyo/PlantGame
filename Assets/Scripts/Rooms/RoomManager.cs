@@ -12,7 +12,6 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
         SetRoom(currentRoom);
-        Debug.Log(LayerMask.GetMask(LayerName));
         _layerIndex = LayerMask.GetMask(LayerName);
     }
     private void FixedUpdate()
@@ -21,7 +20,6 @@ public class RoomManager : MonoBehaviour
         {
             if (Physics.BoxCast(room.RoomCenter + room.HalfExtent.y * Vector3.up, room.HalfExtent, Vector3.down, out _hit, Quaternion.identity, 10, _layerIndex))
             {
-                Debug.Log("Cast success");
                 SetRoom(room);
             }
         }

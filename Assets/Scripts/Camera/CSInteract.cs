@@ -16,7 +16,6 @@ public class CSInteract : IState
         EventManager.ExitInteractStateEvent += ExitInteract;
         (_camDistance, _pivotRotation, _pivotLocation) = GameManager.Instance.InteractionTarget.GetCamLocation();
         _repositioned = false;
-        Debug.Log("camEntered Interact");
     }
 
     public void Exit()
@@ -33,7 +32,6 @@ public class CSInteract : IState
             cameraManager.transform.localPosition = new Vector3(0, cameraManager.YOffset, _camDistance);
             if ((cameraManager.CameraPivot.transform.position - _pivotLocation).sqrMagnitude < 0.1)
             {
-                Debug.Log("PivotLocked");
                 cameraManager.CameraPivot.transform.position = _pivotLocation;
                 cameraManager.CameraPivot.transform.rotation = _pivotRotation;
                 _repositioned = true;

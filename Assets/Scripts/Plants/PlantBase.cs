@@ -19,7 +19,7 @@ public class PlantBase : MonoBehaviour
     [SerializeField] private int _daysHealthyToFlower;
     private bool _hasNutrientsToGrow;
     public int GrowthStage { get; private set; } = 1;
-    [SerializeField] private int numOfGrowthStages;
+    [field:SerializeField] public int NumOfGrowthStages { get; private set; }
     [SerializeField] private Sprite[] sprites;
     private float _mlofSap = 500;
     [SerializeField] private float daysSickToDie;
@@ -118,11 +118,11 @@ public class PlantBase : MonoBehaviour
     
     protected virtual bool IsReadyToGrow()
     {
-        Debug.Log(_daysHealthy >= _daysHealthyToGrow);
-        Debug.Log(_hasNutrientsToGrow );
-        Debug.Log( numOfGrowthStages > GrowthStage);
-        Debug.Log(SpecialGrowthConditions());
-        if (_daysHealthy >= _daysHealthyToGrow && _hasNutrientsToGrow && numOfGrowthStages > GrowthStage && SpecialGrowthConditions())
+        //Debug.Log(_daysHealthy >= _daysHealthyToGrow);
+        //Debug.Log(_hasNutrientsToGrow );
+        //Debug.Log( NumOfGrowthStages > GrowthStage);
+        //Debug.Log(SpecialGrowthConditions());
+        if (_daysHealthy >= _daysHealthyToGrow && _hasNutrientsToGrow && NumOfGrowthStages > GrowthStage && SpecialGrowthConditions())
         {
             Debug.Log("Is Ready To Grow");
             ResetHealthyDays();

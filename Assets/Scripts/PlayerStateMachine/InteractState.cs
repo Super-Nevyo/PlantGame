@@ -11,7 +11,6 @@ public class InteractState : IState
 
     public void Enter()
     {
-        Debug.Log("Enter InteractState");
         EventManager.InteractAction += ExitInteract;
     }
     public void Exit()

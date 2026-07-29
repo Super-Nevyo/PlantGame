@@ -17,7 +17,6 @@ public class WalkState : IState
         EventManager.MoveAction += OnWalk;
         EventManager.InteractAction += Interact;
         EventManager.EnterInteractStateEvent += EnterInteract;
-        Debug.Log("Enter WalkState");
     }
     public void Exit()
     {
@@ -25,7 +24,6 @@ public class WalkState : IState
         EventManager.InteractAction -= Interact;
         EventManager.EnterInteractStateEvent -= EnterInteract;
         OnWalk(Vector2.zero);
-        Debug.Log("Exit WalkState");
     }
     public void Update()
     {
@@ -39,16 +37,13 @@ public class WalkState : IState
     }
     public void Interact()
     {
-        Debug.Log("InteractAttempted");
         if(_player.DoInteractBoxCast())
         {
-            Debug.Log("hit");
             _player.Interactable?.OnInteract();
         }
     }
     public void EnterInteract()
     {
-        Debug.Log("Entering Interact State");
         _player.MyStateMachine.ChangeState(_player.MyStateMachine.interactState);
     }
     
