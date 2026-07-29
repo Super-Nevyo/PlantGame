@@ -5,6 +5,7 @@ public class RoomManager : MonoBehaviour
     // TODO: once there is a save system, this should be set on load to the saved room
     [SerializeField] private Room currentRoom;
     [SerializeField] private string LayerName;
+    private int _layerIndex;
     private Room[] _connectedRooms;
     private RaycastHit _hit;
 
@@ -12,12 +13,13 @@ public class RoomManager : MonoBehaviour
     {
         SetRoom(currentRoom);
         Debug.Log(LayerMask.GetMask(LayerName));
+        _layerIndex = LayerMask.GetMask(LayerName);
     }
     private void FixedUpdate()
     {
         foreach (Room room in _connectedRooms)
         {
-            if (Physics.BoxCast(room.RoomCenter + room.HalfExtent.y * Vector3.up, room.HalfExtent, Vector3.down, out _hit, Quaternion.identity, 10, LayerMask.GetMask("Player")))
+            if (Physics.BoxCast(room.RoomCenter + room.HalfExtent.y * Vector3.up, room.HalfExtent, Vector3.down, out _hit, Quaternion.identity, 10, _layerIndex))
             {
                 Debug.Log("Cast success");
                 SetRoom(room);

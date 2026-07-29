@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f1150314dbfd3940abe111651a53d36, type: 3}
-  m_Name: MainLab
+  m_Name: SmallLab
   m_EditorClassIdentifier: Assembly-CSharp::Room
-  Name: MainLab
+  Name: SmallLab
   CanCamRotate: 1
   ConnectedRooms:
-  - {fileID: 11400000, guid: 45b310aa2d38ad84698a6853ac507164, type: 2}
-  - {fileID: 11400000, guid: 620dd2dcdcb17e64f8c56d7b6ca9ea7e, type: 2}
-  - {fileID: 11400000, guid: 7b713d32da2aaa2459e85cea932b210b, type: 2}
+  - {fileID: 11400000, guid: 79b730c377955f9408d4dd940f0e3d64, type: 2}
   attachedRoomDefaultRotations:
-  - 0
-  - 180
-  - 90
-  HalfExtent: {x: 10, y: 2.5, z: 10}
-  CamDefaultRotation: 180
-  RoomCenter: {x: 0, y: 2.5, z: 0}
+  - 270
+  HalfExtent: {x: 6, y: 2.5, z: 8}
+  CamDefaultRotation: 90
+  RoomCenter: {x: 0, y: 2.5, z: -24}
