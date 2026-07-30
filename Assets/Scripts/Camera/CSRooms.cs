@@ -6,6 +6,8 @@ public class CSRooms : IState
     private Room room;
     private float rotationDirection;
     private bool CamPivotMoved;
+    private float _camDistancePinch = 0.2f;
+    private float _camSlerpSpeed = 0.5f;
     public CSRooms(CameraManager cam)
     {
         cameraManager = cam;
@@ -49,9 +51,9 @@ public class CSRooms : IState
                 CamPivotMoved = true;
             }
         }
-        cameraManager.CameraPivot.transform.rotation = Quaternion.Slerp(cameraManager.CameraPivot.transform.rotation, Quaternion.Euler(0, Mathf.Atan2(room.HalfExtent.x * Mathf.Cos(cameraManager.ObjectiveRotation * Mathf.Deg2Rad), room.HalfExtent.z * Mathf.Sin(cameraManager.ObjectiveRotation * Mathf.Deg2Rad)) * Mathf.Rad2Deg, 0), 0.2f);
+        cameraManager.CameraPivot.transform.rotation = Quaternion.Slerp(cameraManager.CameraPivot.transform.rotation, Quaternion.Euler(0, Mathf.Atan2((room.HalfExtent.x - _camDistancePinch) * Mathf.Cos(cameraManager.ObjectiveRotation * Mathf.Deg2Rad), (room.HalfExtent.z - _camDistancePinch) * Mathf.Sin(cameraManager.ObjectiveRotation * Mathf.Deg2Rad)) * Mathf.Rad2Deg, 0), _camSlerpSpeed);
         // this will hopefully make the camera move in an ellipse
-        cameraManager.gameObject.transform.localPosition = new Vector3(0, cameraManager.YOffset, Mathf.Sqrt(Mathf.Pow(room.HalfExtent.z * Mathf.Sin(cameraManager.ObjectiveRotation * Mathf.Deg2Rad),2) + Mathf.Pow(room.HalfExtent.x * Mathf.Cos(cameraManager.ObjectiveRotation * Mathf.Deg2Rad), 2)));
+        cameraManager.gameObject.transform.localPosition = new Vector3(0, cameraManager.YOffset, Mathf.Sqrt(Mathf.Pow((room.HalfExtent.z - _camDistancePinch) * Mathf.Sin(cameraManager.ObjectiveRotation * Mathf.Deg2Rad),2) + Mathf.Pow((room.HalfExtent.x - _camDistancePinch) * Mathf.Cos(cameraManager.ObjectiveRotation * Mathf.Deg2Rad), 2)));
     }
 
     public void EnterInteractState()
