@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8666186496288791715
 Transform:
   m_ObjectHideFlags: 0
@@ -120,5 +120,68 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8666186496288791715}
+  - {fileID: 8022787812049969079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8635071750001940272
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6172538271088102717}
+    m_Modifications:
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069774591122650563, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+      propertyPath: m_Name
+      value: Hallway_Turn_Light
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+--- !u!4 &8022787812049969079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1766355550011000967, guid: f1535f3214d1c35439f0a91c5ed34c3f, type: 3}
+  m_PrefabInstance: {fileID: 8635071750001940272}
+  m_PrefabAsset: {fileID: 0}
