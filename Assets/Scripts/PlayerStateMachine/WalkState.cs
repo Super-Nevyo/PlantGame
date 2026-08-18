@@ -28,7 +28,7 @@ public class WalkState : IState
     public void Update()
     {
         _actualDirection = _player.Speed * _player.DetermineDirectionBasedOnCam(_walkDirection);
-        _player.Velocity = new Vector3(_actualDirection.x, _player.Velocity.y, _actualDirection.y);
+        _player.Velocity = new Vector3(_actualDirection.x, _player.RB.linearVelocity.y, _actualDirection.y);
     }
 
     public void OnWalk(Vector2 direction)

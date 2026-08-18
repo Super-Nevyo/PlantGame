@@ -18,10 +18,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45b310aa2d38ad84698a6853ac507164, type: 2}
   - {fileID: 11400000, guid: 620dd2dcdcb17e64f8c56d7b6ca9ea7e, type: 2}
   - {fileID: 11400000, guid: 7b713d32da2aaa2459e85cea932b210b, type: 2}
+  - {fileID: 11400000, guid: 74826750bc0ca3144a86b6efd8803e9c, type: 2}
   attachedRoomDefaultRotations:
   - 0
   - 180
   - 90
+  - 270
   HalfExtent: {x: 10, y: 2.5, z: 10}
   CamDefaultRotation: 180
   RoomCenter: {x: 0, y: 2.5, z: 0}

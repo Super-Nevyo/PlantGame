@@ -7,7 +7,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private string LayerName;
     private int _layerIndex;
     private Room[] _connectedRooms;
-    private RaycastHit _hit;
+    private RaycastHit[] _hit;
 
     void Start()
     {
@@ -18,7 +18,9 @@ public class RoomManager : MonoBehaviour
     {
         foreach (Room room in _connectedRooms)
         {
-            if (Physics.BoxCast(room.RoomCenter + room.HalfExtent.y * Vector3.up, room.HalfExtent, Vector3.down, out _hit, Quaternion.identity, 10, _layerIndex))
+            //if (Physics.BoxCast(room.RoomCenter + room.HalfExtent.y * Vector3.up, room.HalfExtent, Vector3.down, out _hit, Quaternion.identity, 10, _layerIndex))
+            //if (Physics.BoxCastAll(room.RoomCenter, room.HalfExtent, Vector3.up, Quaternion.identity, room.HalfExtent.y, _layerIndex).Length <0)
+            if(Physics.CheckBox(room.RoomCenter, room.HalfExtent, Quaternion.identity, _layerIndex))
             {
                 SetRoom(room);
             }
